@@ -1,0 +1,44 @@
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Creating tables
+Table vehicles {
+  vehicle_id int [pk] // auto-increment
+  manufacturer varchar
+  model varchar
+  year int
+  color varchar
+}
+
+Table invoices {
+  invoice_id int [pk]
+  date timestamp
+  vehicle_id int //[ref: - vehicles.vehicle_id]
+  customer_id varchar //[ref: > customers.customer_id]
+  staff_id id //[ref: > salesperson.staff_id]
+}
+
+Table salesperson {
+  staff_id int [pk]
+  name varchar
+  store varchar
+ }
+ 
+Table customers {
+  customer_id int [pk]
+  name varchar
+  phone int
+  email varchar
+  address varchar
+  country varchar
+  zip_code int
+}
+
+// Creating references
+// You can also define relaionship separately
+// > many-to-one; < one-to-many; - one-to-one
+Ref: vehicles.vehicle_id > invoices.vehicle_id
+Ref: salesperson.staff_id < invoices.staff_id
+Ref: customers.customer_id < invoices.customer_id
+
+
